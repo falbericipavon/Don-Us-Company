@@ -1,6 +1,5 @@
 // Selectores
 const listaProductos = document.querySelector('#lista-productos');
-const btnCupones = document.querySelector('#cupones');
 const cupItems = document.querySelectorAll('.cup-item');
 const tableCarrito = document.querySelector('#carrito tbody');
 const botonEliminar = document.querySelector('#lista-carrito tbody');
@@ -30,6 +29,32 @@ $(document).ready(() => {
 	console.log("Bienvenido al sitio");
 	totalVentaParcial.innerHTML = 'Agregá productos a tu carrito';
 })
+
+
+// Boton Cupon
+cupItems.forEach(item => {
+    item.addEventListener('click', function(e) {
+        btnCupones(e); // Llama a la función con el evento como argumento
+    });
+});
+
+function btnCupones(e) {
+    // Puedes usar el evento para obtener información del elemento clicado
+    const clickedElement = e.currentTarget;
+
+    // Ejemplo de lógica: mostrar un SweetAlert
+    swal({
+		title: "Desconta con el siguiente QR",
+		content: (() => {
+			const div = document.createElement('div');
+			div.innerHTML = `<img src="img/qr.png" alt="qr" style="width: 200px; margin: 10px 0;">`;
+			return div;
+		})(),
+		dangerMode: true,
+	})
+
+    console.log(`Evento activado desde:`, clickedElement);
+}
 
 // Listeners
 document.addEventListener('DOMContentLoaded', () => {
@@ -279,27 +304,3 @@ function btnInicio(e) {
 	})
 }
 
-// Boton Cupon
-cupItems.forEach(item => {
-    item.addEventListener('click', function(e) {
-        btnCupones(e); // Llama a la función con el evento como argumento
-    });
-});
-
-function btnCupones(e) {
-    // Puedes usar el evento para obtener información del elemento clicado
-    const clickedElement = e.currentTarget;
-
-    // Ejemplo de lógica: mostrar un SweetAlert
-    swal({
-		title: "Desconta con el siguiente QR",
-		content: (() => {
-			const div = document.createElement('div');
-			div.innerHTML = `<img src="img/qr.png" alt="qr" style="width: 200px; margin: 10px 0;">`;
-			return div;
-		})(),
-		dangerMode: true,
-	})
-
-    console.log(`Evento activado desde:`, clickedElement);
-}
